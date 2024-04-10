@@ -1,0 +1,5 @@
+# Project exclude paths
+/ape-rpc-easy/target/
+/example-common/target/
+/example-consumer/target/
+/example-producer/target/
