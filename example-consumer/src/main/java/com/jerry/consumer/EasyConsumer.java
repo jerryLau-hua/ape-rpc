@@ -3,6 +3,7 @@ package com.jerry.consumer;
 import com.jerry.aperpc.proxy.ServiceProxyFactory;
 import com.jerry.common.model.Cat;
 import com.jerry.common.service.CatService;
+import com.jerry.consumer.proxy.CatServiceProxy;
 
 /**
  * @version 1.0

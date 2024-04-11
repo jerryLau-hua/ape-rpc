@@ -4,6 +4,7 @@ import com.jerry.aperpc.localregcenter.LocalRegCenter;
 import com.jerry.aperpc.model.RpcRequest;
 import com.jerry.aperpc.model.RpcResponse;
 import com.jerry.aperpc.serializer.JDKSerializer;
+import com.jerry.aperpc.serializer.KryoSerializer;
 import com.jerry.aperpc.serializer.Serializer;
 import io.vertx.core.Handler;
 import io.vertx.core.buffer.Buffer;
@@ -27,7 +28,7 @@ public class HttpServerHandler implements Handler<HttpServerRequest> {
     @Override
     public void handle(HttpServerRequest request) {
         //1-指定序列化器
-        final Serializer serializer = new JDKSerializer();
+        final Serializer serializer = new KryoSerializer();
         //打印请求信息日志
         System.out.println("Received request :" +"request.uri: ["+ request.uri() + "] request.method : ["+request.method()+"]");
 

@@ -5,6 +5,7 @@ import cn.hutool.http.HttpResponse;
 import com.jerry.aperpc.model.RpcRequest;
 import com.jerry.aperpc.model.RpcResponse;
 import com.jerry.aperpc.serializer.JDKSerializer;
+import com.jerry.aperpc.serializer.KryoSerializer;
 import com.jerry.aperpc.serializer.Serializer;
 
 import java.io.IOException;
@@ -45,7 +46,7 @@ public class ServiceProxy implements InvocationHandler {
         System.out.println("invoke current  method :" + method + "args: " + args);
         System.out.println("invoke current  method :" + method.getName() + "  args: " + args +"  parameterTypes:"+method.getParameterTypes());
         // 指定序列化器
-        final Serializer serializer = new JDKSerializer();
+        final Serializer serializer = new KryoSerializer();
 
         // 构造请求
         RpcRequest rpcRequest = RpcRequest.builder()
