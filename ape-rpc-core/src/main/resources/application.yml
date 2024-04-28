@@ -1,0 +1,9 @@
+#RPC:
+#  name: "ape-rpc1"
+#  serverPort: 8099
+#  version: "1.0.0"
+#  serverHost: "localhost1"
+#
+#api:
+#  rpc:sds
+#  sdsd:sds

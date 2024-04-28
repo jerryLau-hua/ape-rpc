@@ -8,6 +8,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="ape-rpc-easy" />
+        <module name="ape-rpc-core" />
         <module name="example-common" />
         <module name="example-producer" />
         <module name="example-consumer" />

@@ -26,4 +26,12 @@ public interface CatService {
     Cat getCatById(int id);
 
     //....other
+
+    /**
+     * 获取猫咪数量
+     * @return
+     */
+    default int getCatCount() {
+        return 100;
+    }
 }

@@ -1,9 +1,8 @@
 package com.jerry.consumer;
 
-import com.jerry.aperpc.proxy.ServiceProxyFactory;
+import com.jerry.rpccore.proxy.ServiceProxyFactory;
 import com.jerry.common.model.Cat;
 import com.jerry.common.service.CatService;
-import com.jerry.consumer.proxy.CatServiceProxy;
 
 /**
  * @version 1.0
@@ -22,12 +21,16 @@ public class EasyConsumer {
 //        cat.setColor("#f0f0f0");
 
         //调用
-        Cat newCat = catService.getCatById(1);
-        if (newCat != null) {
-            System.out.println("消费者获取到的 cat ：" + newCat.toString());
-        } else {
-            System.out.println("no cat");
-        }
+//        Cat newCat = catService.getCatById(1);
+//        if (newCat != null) {
+//            System.out.println("消费者获取到的 cat ：" + newCat.toString());
+//        } else {
+//            System.out.println("no cat");
+//        }
+
+        int catCount = catService.getCatCount();
+        System.out.println();
+        System.out.println("消费者获取到的猫猫数量：" + catCount);
 
     }
 

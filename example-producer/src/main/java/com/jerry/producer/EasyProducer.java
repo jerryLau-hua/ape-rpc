@@ -1,9 +1,10 @@
 package com.jerry.producer;
 
-import com.jerry.aperpc.localregcenter.LocalRegCenter;
-import com.jerry.aperpc.server.VertxHttpServer;
 import com.jerry.common.service.CatService;
 import com.jerry.producer.serviceImpl.CatServiceImpl;
+import com.jerry.rpccore.conf.RPCGlobalConfHolder;
+import com.jerry.rpccore.localregcenter.LocalRegCenter;
+import com.jerry.rpccore.server.VertxHttpServer;
 
 /**
  * @version 1.0
@@ -13,11 +14,13 @@ import com.jerry.producer.serviceImpl.CatServiceImpl;
  */
 public class EasyProducer {
     public static void main(String[] args) {
+        //RPC服务配置初始化
+        RPCGlobalConfHolder.initConf();
         //注册服务
         LocalRegCenter.add(CatService.class.getName(), CatServiceImpl.class);
 
         //提供服务
         VertxHttpServer vertxHttpServer = new VertxHttpServer();
-        vertxHttpServer.exec(8080);
+        vertxHttpServer.exec(Integer.valueOf(RPCGlobalConfHolder.getRpcConfig().getServerPort()));
     }
 }

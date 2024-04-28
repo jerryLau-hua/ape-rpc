@@ -23,7 +23,7 @@
 
         <dependency>
             <groupId>com.jerry</groupId>
-            <artifactId>ape-rpc-easy</artifactId>
+            <artifactId>ape-rpc-core</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
 
