@@ -1,9 +1,6 @@
 #RPC:
 #  name: "ape-rpc1"
-#  serverPort: 8099
+#  serverPort: 8080
 #  version: "1.0.0"
-#  serverHost: "localhost1"
-#
-#api:
-#  rpc:sds
-#  sdsd:sds
+#  serverHost: "localhost233"
+#  mock: true

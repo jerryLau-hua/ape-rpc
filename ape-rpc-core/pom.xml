@@ -14,6 +14,11 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
     <dependencies>
+        <dependency>
+            <groupId>com.jerry</groupId>
+            <artifactId>example-common</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
         <!--        高性能的 NIO 框架 Vert.x 来作为 RPC 框架的 web 服务器。-->
         <dependency>
             <groupId>io.vertx</groupId>

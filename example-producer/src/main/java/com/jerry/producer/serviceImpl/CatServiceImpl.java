@@ -11,9 +11,9 @@ import com.jerry.common.service.CatService;
  */
 public class CatServiceImpl implements CatService {
     @Override
-    public Cat getCat(Cat cat) {
-        System.out.println("调用到了服务提供者：" + cat.toString());
-        return cat;
+    public Cat getCat() {
+        System.out.println("调用到了服务提供者：获取🐱"  );
+        return new Cat(1,"tom","blue");
     }
 
     @Override

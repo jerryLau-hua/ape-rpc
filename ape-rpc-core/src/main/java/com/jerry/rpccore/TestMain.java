@@ -1,6 +1,8 @@
 package com.jerry.rpccore;
 
 import com.github.javafaker.Faker;
+import com.github.javafaker.IdNumber;
+import com.github.javafaker.Number;
 import com.jerry.rpccore.model.User;
 
 import java.io.BufferedWriter;
@@ -14,7 +16,7 @@ import java.util.Locale;
  * @version 1.0
  * @Author jerryLau
  * @Date 2024/4/11 16:38
- * @注释
+ * @注释 faker生成数据
  */
 public class TestMain {
     public static void main(String[] args) {
@@ -23,22 +25,24 @@ public class TestMain {
 
         Faker instance = Faker.instance(Locale.CHINA);
 
-        for (int i = 0; i < 10; i++) {
-            User build = User.builder()
-                    .id(i).name(instance.name().fullName())
-                    .age(instance.number().randomDigitNotZero())
-                    .address(instance.address().city() + instance.address().streetName() + instance.address().streetAddress())
-                    .phone(instance.phoneNumber().cellPhone())
-                    .build();
-            System.out.println(build);
-
-            //插入数据库
-            //....
-//            userservice.save(build);
-            users.add(build);
-        }
-        //写入文件
-        saveUsersToFile(users);
+        long l = instance.number().randomNumber(1, true);
+        System.out.println(l);
+//        for (int i = 0; i < 10; i++) {
+//            User build = User.builder()
+//                    .id(i).name(instance.name().fullName())
+//                    .age(instance.number().randomDigitNotZero())
+//                    .address(instance.address().city() + instance.address().streetName() + instance.address().streetAddress())
+//                    .phone(instance.phoneNumber().cellPhone())
+//                    .build();
+//            System.out.println(build);
+//
+//            //插入数据库
+//            //....
+////            userservice.save(build);
+//            users.add(build);
+//        }
+//        //写入文件
+//        saveUsersToFile(users);
     }
 
     /***

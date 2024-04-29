@@ -20,7 +20,7 @@ import java.io.IOException;
 
 public class CatServiceProxy implements CatService {
     @Override
-    public Cat getCat(Cat cat) {
+    public Cat getCat() {
         // 指定序列化器
         final Serializer serializer = new KryoSerializer();
 
@@ -29,7 +29,6 @@ public class CatServiceProxy implements CatService {
                 .serviceName(CatService.class.getName())
                 .methodName("getCat")
                 .parameterTypes(new Class[]{Cat.class})
-                .args(new Object[]{cat})
                 .build();
         try {
             // 序列化（Java 对象 => 字节数组）

@@ -38,4 +38,12 @@ public class RpcConf {
      * 默认不开启mock
      */
     private boolean mock = false;
+
+    /***
+     * 重写mock属性的setter方法
+     * @param mock
+     */
+    public void setMock(String mock) {
+        this.mock = Boolean.valueOf(mock);
+    }
 }

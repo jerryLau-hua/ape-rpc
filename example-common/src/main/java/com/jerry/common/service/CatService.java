@@ -12,10 +12,10 @@ import com.jerry.common.model.Cat;
 public interface CatService {
     /***
      * 获取猫咪信息
-     * @param cat
+     *
      * @return
      */
-    Cat getCat(Cat cat);
+    Cat getCat();
 
 
     /***

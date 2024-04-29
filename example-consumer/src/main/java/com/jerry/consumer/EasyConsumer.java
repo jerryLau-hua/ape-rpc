@@ -21,16 +21,16 @@ public class EasyConsumer {
 //        cat.setColor("#f0f0f0");
 
         //调用
-//        Cat newCat = catService.getCatById(1);
-//        if (newCat != null) {
-//            System.out.println("消费者获取到的 cat ：" + newCat.toString());
-//        } else {
-//            System.out.println("no cat");
-//        }
+        Cat newCat = catService.getCatById(1);
+        if (newCat != null) {
+            System.out.println("消费者获取到的 cat ：" + newCat.toString());
+        } else {
+            System.out.println("no cat");
+        }
 
-        int catCount = catService.getCatCount();
-        System.out.println();
-        System.out.println("消费者获取到的猫猫数量：" + catCount);
+//        int catCount = catService.getCatCount();
+//        System.out.println();
+//        System.out.println("消费者获取到的猫猫数量：" + catCount);
 
     }
 
