@@ -2,10 +2,12 @@ package com.jerry.rpccore.proxy;
 
 import cn.hutool.http.HttpRequest;
 import cn.hutool.http.HttpResponse;
+import com.jerry.rpccore.conf.RPCGlobalConfHolder;
 import com.jerry.rpccore.model.RpcRequest;
 import com.jerry.rpccore.model.RpcResponse;
 import com.jerry.rpccore.serializer.KryoSerializer;
 import com.jerry.rpccore.serializer.Serializer;
+import com.jerry.rpccore.serializer.SerializerFactory;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationHandler;
@@ -45,7 +47,8 @@ public class ServiceProxy implements InvocationHandler {
         System.out.println("invoke current  method :" + method + "args: " + args);
         System.out.println("invoke current  method :" + method.getName() + "  args: " + args +"  parameterTypes:"+method.getParameterTypes());
         // 指定序列化器
-        final Serializer serializer = new KryoSerializer();
+        final Serializer serializer = SerializerFactory.getInstance(RPCGlobalConfHolder.getRpcConfig().getSerializer());
+        System.out.println("serializer:["+serializer.getClass().getName()+"]");
 
         // 构造请求
         RpcRequest rpcRequest = RpcRequest.builder()

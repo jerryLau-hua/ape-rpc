@@ -1,0 +1,2 @@
+com.jerry.rpccore.serializer.JDKSerializer
+com.jerry.rpccore.serializer.KryoSerializer

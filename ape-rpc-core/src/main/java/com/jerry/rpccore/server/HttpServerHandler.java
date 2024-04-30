@@ -1,10 +1,11 @@
 package com.jerry.rpccore.server;
 
+import com.jerry.rpccore.conf.RPCGlobalConfHolder;
 import com.jerry.rpccore.localregcenter.LocalRegCenter;
 import com.jerry.rpccore.model.RpcRequest;
 import com.jerry.rpccore.model.RpcResponse;
-import com.jerry.rpccore.serializer.KryoSerializer;
 import com.jerry.rpccore.serializer.Serializer;
+import com.jerry.rpccore.serializer.SerializerFactory;
 import io.vertx.core.Handler;
 import io.vertx.core.buffer.Buffer;
 import io.vertx.core.http.HttpServerRequest;
@@ -27,7 +28,7 @@ public class HttpServerHandler implements Handler<HttpServerRequest> {
     @Override
     public void handle(HttpServerRequest request) {
         //1-指定序列化器
-        final Serializer serializer = new KryoSerializer();
+        final Serializer serializer = SerializerFactory.getInstance(RPCGlobalConfHolder.getRpcConfig().getSerializer());
         //打印请求信息日志
         System.out.println("Received request :" +"request.uri: ["+ request.uri() + "] request.method : ["+request.method()+"]");
 

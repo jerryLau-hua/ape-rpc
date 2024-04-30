@@ -1,5 +1,6 @@
 package com.jerry.rpccore.conf;
 
+import com.jerry.rpccore.serializer.SerializerKeys;
 import lombok.Data;
 
 /**
@@ -39,6 +40,15 @@ public class RpcConf {
      */
     private boolean mock = false;
 
+
+    /***
+     * 默认序列化器
+     * 默认使用jdk序列化器
+     */
+    private String serializer = SerializerKeys.JDK;
+
+
+
     /***
      * 重写mock属性的setter方法
      * @param mock
@@ -46,4 +56,7 @@ public class RpcConf {
     public void setMock(String mock) {
         this.mock = Boolean.valueOf(mock);
     }
+
+
+
 }

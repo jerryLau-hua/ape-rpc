@@ -1,0 +1,5 @@
+#系统内置序列化器配置参数
+jdk:com.jerry.rpccore.serializer.JDKSerializer
+hessian:com.jerry.rpccore.serializer.HessianSerializer
+json:com.jerry.rpccore.serializer.JsonSerializer
+kryo:com.jerry.rpccore.serializer.KryoSerializer
