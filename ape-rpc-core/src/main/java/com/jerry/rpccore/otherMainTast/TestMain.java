@@ -1,4 +1,4 @@
-package com.jerry.rpccore;
+package com.jerry.rpccore.otherMainTast;
 
 import com.github.javafaker.Faker;
 import com.github.javafaker.IdNumber;

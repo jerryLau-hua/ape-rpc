@@ -1,5 +1,6 @@
-package com.jerry.rpccore;
+package com.jerry.rpccore.otherMainTast;
 
+import com.jerry.rpccore.regCenter.RegCenterInterface;
 import com.jerry.rpccore.serializer.Serializer;
 
 import java.util.ServiceLoader;
@@ -10,13 +11,13 @@ import java.util.ServiceLoader;
  * @Date 2024/4/11 16:38
  * @注释 java 内置spi机制，通过ServiceLoader加载序列化器
  */
-public class Main {
+public class ServiceLoaderMain {
     public static void main(String[] args) {
 
-        Serializer serializer = null;
-        ServiceLoader<Serializer> load = ServiceLoader.load(Serializer.class);
+        RegCenterInterface serializer = null;
+        ServiceLoader<RegCenterInterface> load = ServiceLoader.load(RegCenterInterface.class);
 
-        for (Serializer serializer1 : load) {
+        for (RegCenterInterface serializer1 : load) {
             serializer = serializer1;
 
             System.out.println(serializer);

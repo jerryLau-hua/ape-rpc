@@ -1,0 +1,2 @@
+#系统内置注册中心配置参数
+etcd:com.jerry.rpccore.regCenter.EtcdRegCenter

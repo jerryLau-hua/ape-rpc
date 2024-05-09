@@ -1,5 +1,6 @@
 package com.jerry.rpccore.conf;
 
+import com.jerry.rpccore.conf.regCenterConf.RegConf;
 import com.jerry.rpccore.serializer.SerializerKeys;
 import lombok.Data;
 
@@ -46,6 +47,11 @@ public class RpcConf {
      * 默认使用jdk序列化器
      */
     private String serializer = SerializerKeys.JDK;
+
+    /**
+     * 注册中心配置
+     */
+    private RegConf registryConfig = new RegConf();
 
 
 

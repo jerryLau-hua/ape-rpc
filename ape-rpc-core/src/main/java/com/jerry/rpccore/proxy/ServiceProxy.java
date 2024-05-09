@@ -1,17 +1,23 @@
 package com.jerry.rpccore.proxy;
 
+import cn.hutool.core.collection.CollUtil;
 import cn.hutool.http.HttpRequest;
 import cn.hutool.http.HttpResponse;
 import com.jerry.rpccore.conf.RPCGlobalConfHolder;
+import com.jerry.rpccore.conf.RpcConf;
 import com.jerry.rpccore.model.RpcRequest;
 import com.jerry.rpccore.model.RpcResponse;
-import com.jerry.rpccore.serializer.KryoSerializer;
+import com.jerry.rpccore.model.ServiceMetaInfo;
+import com.jerry.rpccore.regCenter.RegCenterFactory;
+import com.jerry.rpccore.regCenter.RegCenterInterface;
 import com.jerry.rpccore.serializer.Serializer;
 import com.jerry.rpccore.serializer.SerializerFactory;
+import com.jerry.rpccore.utils.RPCCommonConstant;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
+import java.util.List;
 
 /**
  * @version 1.0
@@ -43,7 +49,7 @@ public class ServiceProxy implements InvocationHandler {
      */
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-
+        String serviceName = method.getDeclaringClass().getName();
         System.out.println("invoke current  method :" + method + "args: " + args);
         System.out.println("invoke current  method :" + method.getName() + "  args: " + args +"  parameterTypes:"+method.getParameterTypes());
         // 指定序列化器
@@ -52,7 +58,7 @@ public class ServiceProxy implements InvocationHandler {
 
         // 构造请求
         RpcRequest rpcRequest = RpcRequest.builder()
-                .serviceName(method.getDeclaringClass().getName())
+                .serviceName(serviceName)
                 .methodName(method.getName())
                 .parameterTypes(method.getParameterTypes())
                 .args(args)
@@ -64,7 +70,31 @@ public class ServiceProxy implements InvocationHandler {
 
             // 发送请求
             //todo:暂时设置成硬编码，后面改成服务发现
-            try (HttpResponse httpResponse = HttpRequest.post("http://localhost:8080")
+//            try (HttpResponse httpResponse = HttpRequest.post("http://localhost:8080")
+//                    .body(bodyBytes)
+//                    .execute()) {
+//                byte[] result = httpResponse.bodyBytes();
+//                // 反序列化（字节数组 => Java 对象）
+//                RpcResponse rpcResponse = serializer.deserialize(result, RpcResponse.class);
+//                return rpcResponse.getData();
+//            }
+            //todo:通过服务发现获取服务地址
+
+            //获取全局配置信息
+            RpcConf rpcConfig = RPCGlobalConfHolder.getRpcConfig();
+            RegCenterInterface registry = RegCenterFactory.getRegCenter(rpcConfig.getRegistryConfig().getRegType());
+            ServiceMetaInfo serviceMetaInfo = new ServiceMetaInfo();
+            serviceMetaInfo.setServiceName(serviceName);
+            serviceMetaInfo.setServiceVersion(RPCCommonConstant.DEFAULT_SERVICE_VERSION);
+            List<ServiceMetaInfo> serviceMetaInfoList = registry.serviceDiscovery(serviceMetaInfo.getServiceKey());
+            if (CollUtil.isEmpty(serviceMetaInfoList)) {
+                throw new RuntimeException("暂无服务地址");
+            }
+
+            //先取第一个
+            ServiceMetaInfo selectedServiceMetaInfo = serviceMetaInfoList.get(0);
+            String serviceAddress = selectedServiceMetaInfo.getServiceAddress();
+            try (HttpResponse httpResponse = HttpRequest.post(serviceAddress)
                     .body(bodyBytes)
                     .execute()) {
                 byte[] result = httpResponse.bodyBytes();
@@ -75,8 +105,6 @@ public class ServiceProxy implements InvocationHandler {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
         return null;
     }
 }

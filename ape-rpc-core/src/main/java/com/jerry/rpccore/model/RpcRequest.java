@@ -1,5 +1,6 @@
 package com.jerry.rpccore.model;
 
+import com.jerry.rpccore.utils.RPCCommonConstant;
 import lombok.*;
 
 import java.io.Serializable;
@@ -32,4 +33,10 @@ public class RpcRequest implements Serializable {
      *参数列表
      */
     private Object[] args;
+
+
+    /***
+     * 服务版本号
+     */
+    private String serviceVersion= RPCCommonConstant.DEFAULT_SERVICE_VERSION;
 }

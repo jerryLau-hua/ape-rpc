@@ -1,5 +1,8 @@
 package com.jerry.rpccore.conf;
 
+import com.jerry.rpccore.conf.regCenterConf.RegConf;
+import com.jerry.rpccore.regCenter.RegCenterFactory;
+import com.jerry.rpccore.regCenter.RegCenterInterface;
 import com.jerry.rpccore.utils.ConfUtils;
 import com.jerry.rpccore.utils.RPCCommonConstant;
 import lombok.extern.slf4j.Slf4j;
@@ -21,8 +24,15 @@ public class RPCGlobalConfHolder {
      * @param newRpcConf
      */
     public static void initConf(RpcConf newRpcConf) {
+        //
         rpcConf = newRpcConf;
         log.info("rpc init,config ={}" + newRpcConf.toString());
+
+        //注册中心配置初始化
+        RegConf registryConfig = newRpcConf.getRegistryConfig();
+        RegCenterInterface regCenter = RegCenterFactory.getRegCenter(registryConfig.getRegType());
+        regCenter.init(registryConfig);
+        log.info("rpc init,registry config ={}" + registryConfig.toString());
     }
 
     /***
